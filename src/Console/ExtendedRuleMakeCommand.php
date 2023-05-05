@@ -75,7 +75,7 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
      */
     private function createPrompt(string $ruleDescription): string
     {
-        return "Generate the PHP code for a Laravel validation rule class named '".$this->argument('name')."' that implements the Illuminate\Contracts\Validation\ValidationRule interface and does the following:".
+        return "Generate the PHP code for a Laravel validation rule class named '".$this->argument('name')."' that implements the Rule interface and does the following:".
             "\n$ruleDescription".
             "\nProvide only the final Laravel validation rule class code without any explanations or additional context.";
     }
