@@ -36,9 +36,12 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
                 $this->storeGeneratedContent($generatedContent);
 
                 $this->info('AI-generated content stored at: '.$this->getPath($this->qualifyClass($this->getNameInput())));
-            }
 
-            return parent::handle();
+                // Return true when AI option is used and content is stored successfully
+                return true;
+            } else {
+                return parent::handle();
+            }
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
 
