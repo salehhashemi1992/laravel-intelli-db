@@ -1,5 +1,9 @@
 # Laravel Intelli DB
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
+[![Total Downloads](https://img.shields.io/packagist/dt/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/salehhashemi1992/laravel-intelli-db/run-tests.yml?branch=master&label=tests)](https://github.com/salehhashemi1992/laravel-intelli-db/actions/workflows/run-tests.yml)
+
 ### Testing
 
 ```bash
