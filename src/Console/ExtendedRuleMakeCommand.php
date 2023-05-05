@@ -74,6 +74,6 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
     {
         return "Generate the PHP code for a Laravel validation rule named '".$this->argument('name')."' that does the following:".
             "\n$ruleDescription".
-            "\nProvide only the final code snippet without any explanations or additional context.";
+            "\nProvide only the final Laravel validation rule code snippet without any explanations or additional context.";
     }
 }
