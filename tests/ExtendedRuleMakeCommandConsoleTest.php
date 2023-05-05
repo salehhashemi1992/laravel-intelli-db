@@ -5,9 +5,18 @@ namespace Salehhashemi\LaravelIntelliDb\Tests;
 use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
 use Salehhashemi\LaravelIntelliDb\Console\ExtendedRuleMakeCommand;
+use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
 class ExtendedRuleMakeCommandConsoleTest extends TestCase
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getPackageProviders($app): array
+    {
+        return [LaravelIntelliDbServiceProvider::class];
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
