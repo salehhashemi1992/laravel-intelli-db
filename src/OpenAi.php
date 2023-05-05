@@ -14,7 +14,7 @@ class OpenAi
      * @throws RequestException
      * @throws InvalidArgumentException
      */
-    public static function execute(string $prompt, int $maxTokens = 300): string
+    public function execute(string $prompt, int $maxTokens = 300): string
     {
         $apiKey = config('intelli-db.openAiApiKey');
 
