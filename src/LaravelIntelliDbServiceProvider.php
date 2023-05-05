@@ -2,12 +2,25 @@
 
 namespace Salehhashemi\LaravelIntelliDb;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Composer;
 use Illuminate\Support\ServiceProvider;
 use Salehhashemi\LaravelIntelliDb\Console\ExtendedMigrationMakeCommand;
 use Salehhashemi\LaravelIntelliDb\Console\ExtendedRuleMakeCommand;
 
 class LaravelIntelliDbServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+        $this->app->singleton(ExtendedMigrationMakeCommand::class, function ($app) {
+            $filesystem = $app->make(Filesystem::class);
+            $composer = $app->make(Composer::class);
+            $stubPath = $app->basePath('stubs');
+
+            return new ExtendedMigrationMakeCommand($filesystem, $composer, $stubPath);
+        });
+    }
+
     /**
      * Bootstrap the application services.
      */

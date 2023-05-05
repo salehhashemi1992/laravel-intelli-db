@@ -32,9 +32,9 @@ class ExtendedMigrationCreator extends MigrationCreator
     /**
      * @throws Exception
      */
-    protected function populateStub($name, $stub, $table)
+    protected function populateStub($stub, $table)
     {
-        $stub = parent::populateStub($name, $stub, $table);
+        $stub = parent::populateStub($stub, $table);
 
         if ($this->useAI) {
             $prompt = $this->createPrompt($this->description);
