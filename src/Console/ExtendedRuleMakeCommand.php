@@ -17,8 +17,6 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
 
     public function handle(): bool|null
     {
-        $this->handleDomainOption();
-
         if ($this->option('ai')) {
             // Ask the user for the desired rule content
             $ruleDescription = $this->ask('Please describe the validation rule you want to generate (e.g., "validate unique email")');
