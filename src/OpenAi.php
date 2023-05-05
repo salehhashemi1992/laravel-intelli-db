@@ -9,10 +9,8 @@ class OpenAi
 {
     /**
      * Execute the OpenAI API call with a given prompt.
-     *
-     * @throws RequestException
      */
-    public static function execute(string $prompt, int $maxTokens = 300): array
+    public static function execute(string $prompt, int $maxTokens = 300): string
     {
         $input_data = [
             'temperature' => 0.7,
