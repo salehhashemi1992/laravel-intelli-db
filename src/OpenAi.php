@@ -35,7 +35,7 @@ class OpenAi
             ],
         ];
 
-        $response = Http::asForm()->withHeaders([
+        $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$apiKey,
             'Content-Type' => 'application/json',
         ])->post('https://api.openai.com/v1/chat/completions', $input_data);
