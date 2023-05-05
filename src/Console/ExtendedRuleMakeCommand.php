@@ -1,6 +1,6 @@
 <?php
 
-namespace Salehhashemi\LaravelDomainExpert\Console;
+namespace Salehhashemi\LaravelIntelliDb\Console;
 
 use Illuminate\Foundation\Console\RuleMakeCommand;
 use Salehhashemi\LaravelIntelliDb\OpenAi;

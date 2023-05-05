@@ -3,7 +3,7 @@
 namespace Salehhashemi\LaravelIntelliDb;
 
 use Illuminate\Support\ServiceProvider;
-use Salehhashemi\LaravelDomainExpert\Console\ExtendedRuleMakeCommand;
+use Salehhashemi\LaravelIntelliDb\Console\ExtendedRuleMakeCommand;
 
 class LaravelIntelliDbServiceProvider extends ServiceProvider
 {
