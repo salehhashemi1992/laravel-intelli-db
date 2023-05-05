@@ -2,6 +2,7 @@
 
 namespace Salehhashemi\LaravelIntelliDb\Console;
 
+use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Foundation\Console\RuleMakeCommand;
 use Illuminate\Http\Client\RequestException;
@@ -45,6 +46,10 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
             return false;
         } catch (FileNotFoundException $e) {
             $this->error('Error storing AI-generated content: '.$e->getMessage());
+
+            return false;
+        } catch (Exception $e) {
+            $this->error($e->getMessage());
 
             return false;
         }
