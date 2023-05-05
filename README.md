@@ -6,7 +6,7 @@
 
 A Laravel package that provides an intelligent way to generate database-related components using 
 OpenAI.
-It extends the default `pap artisan make` commands in Laravel to automatically generate the content of each component using AI, based on the provided description.
+It extends the default `artisan make` commands in Laravel to automatically generate the content of each component using AI, based on the provided description.
 
 ## ToDo
 
