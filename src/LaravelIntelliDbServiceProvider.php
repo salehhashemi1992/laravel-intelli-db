@@ -3,6 +3,7 @@
 namespace Salehhashemi\LaravelIntelliDb;
 
 use Illuminate\Support\ServiceProvider;
+use Salehhashemi\LaravelIntelliDb\Console\ExtendedMigrationMakeCommand;
 use Salehhashemi\LaravelIntelliDb\Console\ExtendedRuleMakeCommand;
 
 class LaravelIntelliDbServiceProvider extends ServiceProvider
@@ -19,6 +20,7 @@ class LaravelIntelliDbServiceProvider extends ServiceProvider
 
             $this->commands([
                 ExtendedRuleMakeCommand::class,
+                ExtendedMigrationMakeCommand::class,
             ]);
         }
     }
