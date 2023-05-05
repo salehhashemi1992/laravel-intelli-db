@@ -15,6 +15,7 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
         parent::configure();
 
         $this->addOption('ai', 'a', InputOption::VALUE_NONE, 'Use AI to generate rule content');
+        $this->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'The description of the validation rule');
     }
 
     /**
@@ -23,8 +24,12 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
     protected function buildClass($name): string
     {
         if ($this->option('ai')) {
-            // Ask the user for the desired rule content
-            $ruleDescription = $this->ask('Please describe the validation rule you want to generate (e.g., "validate unique email")');
+            $ruleDescription = $this->option('description');
+
+            if (! $ruleDescription) {
+                // Ask the user for the desired rule content
+                $ruleDescription = $this->ask('Please describe the validation rule you want to generate (e.g., "validate unique email")');
+            }
 
             $prompt = $this->createPrompt($ruleDescription);
 
