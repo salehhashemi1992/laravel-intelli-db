@@ -5,5 +5,5 @@
  */
 return [
     'openAiApiKey' => env('OPEN_AI_KEY'),
-    'model' => env('MODEL', 'gpt-3.5-turbo'),
+    'model' => env('OPEN_AI_MODEL', 'gpt-3.5-turbo'),
 ];
