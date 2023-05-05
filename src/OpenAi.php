@@ -12,7 +12,7 @@ class OpenAi
      *
      * @throws RequestException
      */
-    public function execute(string $prompt, int $maxTokens = 300): array
+    public static function execute(string $prompt, int $maxTokens = 300): array
     {
         $input_data = [
             'temperature' => 0.7,
