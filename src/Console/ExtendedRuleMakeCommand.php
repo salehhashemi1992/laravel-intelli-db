@@ -28,8 +28,7 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
                 // Ask the user for the desired rule content
                 $ruleDescription = $this->ask('Please describe the validation rule you want to generate (e.g., "validate unique email")');
 
-                // Create a prompt to generate the content of the rule file
-                $prompt = 'Create a validation rule in PHP for '.$this->argument('name').' that does the following: '.$ruleDescription;
+                $prompt = $this->createPrompt($ruleDescription);
 
                 $generatedContent = (new OpenAi())->execute($prompt, 1000);
 
@@ -66,5 +65,12 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
         $this->files->put($path, $generatedContent);
 
         $this->info('Generated content stored at: '.$path);
+    }
+
+    private function createPrompt(mixed $ruleDescription): string
+    {
+        // Create a prompt to generate the content of the rule file
+        return 'Create a validation rule in Laravel with '.$this->argument('name').' name. that does the following: '.
+            $ruleDescription;
     }
 }
