@@ -11,11 +11,16 @@ use Symfony\Component\Console\Input\InputOption;
 
 class AiMigrationCommand extends Command
 {
+    // The name and signature of the console command.
     protected $name = 'ai:migration';
 
+    // The console command description.
     protected $description = 'Create a new migration using AI';
 
-    protected function configure()
+    /**
+     * Configure the command options.
+     */
+    protected function configure(): void
     {
         $this->addArgument('name', InputOption::VALUE_REQUIRED, 'The name of the migration')
             ->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'The description of the migration')
@@ -23,6 +28,9 @@ class AiMigrationCommand extends Command
             ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The location where the migration file should be created');
     }
 
+    /**
+     * Execute the console command.
+     */
     public function handle(): int
     {
         $name = $this->argument('name');
@@ -35,19 +43,24 @@ class AiMigrationCommand extends Command
         $description = $this->getMigrationDescription();
 
         $table = $this->option('table');
+
         $path = $this->option('path');
 
+        // Check if the table exists.
         if ($table && ! Schema::hasTable($table)) {
             $this->error("The table '{$table}' does not exist.");
 
             return 1;
         }
 
+        // Get the current schema of the table.
         $schema = $table ? Schema::getColumnListing($table) : null;
+
         $prompt = $this->createAiPrompt($description, $schema);
 
         try {
             $migrationContent = $this->fetchAiGeneratedContent($prompt);
+
             $this->createMigrationFile($name, $migrationContent, $path);
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
@@ -56,6 +69,9 @@ class AiMigrationCommand extends Command
         return 0;
     }
 
+    /**
+     * Get the description of the migration.
+     */
     private function getMigrationDescription(): string
     {
         $description = $this->option('description');
@@ -67,6 +83,9 @@ class AiMigrationCommand extends Command
         return $description;
     }
 
+    /**
+     * Create an AI prompt.
+     */
     private function createAiPrompt(string $description, ?array $schema): string
     {
         $prompt = "Generate a Laravel migration file that does the following:\n$description";
@@ -75,22 +94,27 @@ class AiMigrationCommand extends Command
             $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
         }
 
-        $prompt .= "\nProvide only the final Laravel migration file code using the anonymous class format like this:
-        \n<?php\n\nreturn new class extends Migration {\n// migration methods\n};\n
-        \nInclude everything like php tag and namespace, without any explanations or additional context.";
+        $prompt .= "\nProvide only the final Laravel migration file code using the anonymous class format like this:";
+        $prompt .= "\n<?php\n\nreturn new class extends Migration {\n// migration methods\n};\n";
+        $prompt .= "\nInclude everything like php tag and namespace, without any explanations or additional context.";
 
         return $prompt;
     }
 
     /**
+     * Fetch the AI-generated content.
+     *
      * @throws RequestException
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 1000);
+        return (new OpenAi())->execute($prompt, 2000);
     }
 
-    private function createMigrationFile(string $name, string $content, ?string $path)
+    /**
+     * Create the migration file.
+     */
+    private function createMigrationFile(string $name, string $content, ?string $path): void
     {
         $filename = date('Y_m_d_His').'_'.$name.'.php';
         $path = $path ?? database_path('migrations');
@@ -105,6 +129,9 @@ class AiMigrationCommand extends Command
         $this->info(sprintf('Migration [%s] created successfully.', $name));
     }
 
+    /**
+     * Prompt for missing arguments.
+     */
     protected function promptForMissingArgumentsUsing(): array
     {
         return [
