@@ -2,9 +2,7 @@
 
 namespace Salehhashemi\LaravelIntelliDb\Tests;
 
-use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
-use Salehhashemi\LaravelIntelliDb\Console\AiRuleCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
 class AiRuleCommandConsoleTest extends TestCase
