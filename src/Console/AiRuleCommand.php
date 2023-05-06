@@ -8,13 +8,16 @@ use Illuminate\Http\Client\RequestException;
 use Salehhashemi\LaravelIntelliDb\OpenAi;
 use Symfony\Component\Console\Input\InputOption;
 
-class ExtendedRuleMakeCommand extends RuleMakeCommand
+class AiRuleCommand extends RuleMakeCommand
 {
+    protected $name = 'ai:rule';
+
+    protected $description = 'Create a new rule using AI';
+
     protected function configure()
     {
         parent::configure();
 
-        $this->addOption('ai', 'a', InputOption::VALUE_NONE, 'Use AI to generate rule content');
         $this->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'The description of the validation rule');
     }
 
@@ -23,18 +26,16 @@ class ExtendedRuleMakeCommand extends RuleMakeCommand
      */
     protected function buildClass($name): string
     {
-        if ($this->option('ai')) {
-            $ruleDescription = $this->getRuleDescription();
+        $ruleDescription = $this->getRuleDescription();
 
-            $prompt = $this->createAiPrompt($ruleDescription);
+        $prompt = $this->createAiPrompt($ruleDescription);
 
-            try {
-                return $this->fetchAiGeneratedContent($prompt);
-            } catch (RequestException $e) {
-                $this->error('Error fetching AI-generated content: '.$e->getMessage());
-            } catch (Exception $e) {
-                $this->error($e->getMessage());
-            }
+        try {
+            return $this->fetchAiGeneratedContent($prompt);
+        } catch (RequestException $e) {
+            $this->error('Error fetching AI-generated content: '.$e->getMessage());
+        } catch (Exception $e) {
+            $this->error($e->getMessage());
         }
 
         return parent::buildClass($name);

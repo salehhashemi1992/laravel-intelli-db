@@ -12,12 +12,12 @@ It extends the default `artisan make` commands in Laravel to automatically gener
 
 The following features are planned to be added to the package:
 
-- [x] `make:rule` - Generate custom validation rules using AI
-- [ ] `make:migration` - Generate migration files using AI
-- [ ] `make:factory` - Generate factory files using AI
-- [ ] `make:model` - Generate model files using AI
-- [ ] `make:resource` - Generate resource files using AI
-- [ ] `make:seeder` - Generate seeder files using AI
+- [x] `ai:rule` - Generate custom validation rules using AI
+- [ ] `ai:migration` - Generate migration files using AI
+- [ ] `ai:factory` - Generate factory files using AI
+- [ ] `ai:model` - Generate model files using AI
+- [ ] `ai:resource` - Generate resource files using AI
+- [ ] `ai:seeder` - Generate seeder files using AI
 
 Stay tuned for future updates as we continue to expand the capabilities of the Laravel Intelli DB package.
 
@@ -48,13 +48,13 @@ Stay tuned for future updates as we continue to expand the capabilities of the L
 To create a new validation rule using AI, run the following command:
 
 ```
-php artisan make:rule YourRuleName --ai 
+php artisan ai:rule YourRuleName
 ```
 
 You can provide the description of the rule using the `--description` option:
 
 ```
-php artisan make:rule YourRuleName --ai --description="Your rule description"
+php artisan ai:rule YourRuleName --description="Your rule description"
 ```
 
 If you don't provide a description, it will ask for it interactively.
@@ -66,7 +66,7 @@ The generated rule class will be placed in the `app/Rules` directory.
 To create a rule that validates a unique email address, run:
 
 ```
-php artisan make:rule UniqueEmail --ai --description="Validate unique email address"
+php artisan ai:rule UniqueEmail --description="Validate unique email address"
 ```
 
 ### Testing

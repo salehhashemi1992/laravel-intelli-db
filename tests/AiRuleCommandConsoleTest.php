@@ -4,10 +4,10 @@ namespace Salehhashemi\LaravelIntelliDb\Tests;
 
 use Illuminate\Support\Facades\File;
 use Orchestra\Testbench\TestCase;
-use Salehhashemi\LaravelIntelliDb\Console\ExtendedRuleMakeCommand;
+use Salehhashemi\LaravelIntelliDb\Console\AiRuleCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
-class ExtendedRuleMakeCommandConsoleTest extends TestCase
+class AiRuleCommandConsoleTest extends TestCase
 {
     /**
      * {@inheritdoc}
@@ -22,18 +22,19 @@ class ExtendedRuleMakeCommandConsoleTest extends TestCase
         parent::setUp();
 
         // Register the custom command
-        $this->app->singleton('command.rule.make', function ($app) {
-            return new ExtendedRuleMakeCommand($app['files']);
+        $this->app->singleton('command.ai.rule', function ($app) {
+            return new AiRuleCommand($app['files']);
         });
+
         $this->app->booted(function () {
-            $this->app['command.rule.make']->setLaravel($this->app);
+            $this->app['command.ai.rule']->setLaravel($this->app);
         });
     }
 
     /** @test */
-    public function test_creates_a_rule_without_ai_option()
+    public function test_creates_a_rule_without_description()
     {
-        $this->artisan('make:rule', [
+        $this->artisan('ai:rule', [
             'name' => 'SampleRule',
         ])->assertExitCode(0);
 
@@ -42,13 +43,12 @@ class ExtendedRuleMakeCommandConsoleTest extends TestCase
     }
 
     /** @test */
-    public function test_creates_a_rule_with_ai_option_and_description()
+    public function test_creates_a_rule_with_description()
     {
         $description = 'validate unique email';
 
-        $this->artisan('make:rule', [
+        $this->artisan('ai:rule', [
             'name' => 'SampleRule',
-            '--ai' => true,
             '--description' => $description,
         ])->assertExitCode(0);
 
