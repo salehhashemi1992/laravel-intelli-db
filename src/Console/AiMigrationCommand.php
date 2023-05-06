@@ -75,7 +75,9 @@ class AiMigrationCommand extends Command
             $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
         }
 
-        $prompt .= "\nProvide only the final Laravel migration file code (include everything like php tag and namespace) without any explanations or additional context.";
+        $prompt .= "\nProvide only the final Laravel migration file code using the anonymous class format like this:
+        \n<?php\n\nreturn new class extends Migration {\n    // migration methods\n};\n
+        \nInclude everything like php tag and namespace, without any explanations or additional context.";
 
         return $prompt;
     }
