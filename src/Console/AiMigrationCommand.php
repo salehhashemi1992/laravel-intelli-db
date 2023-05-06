@@ -19,7 +19,7 @@ class AiMigrationCommand extends Command
     {
         $this->addArgument('name', InputOption::VALUE_REQUIRED, 'The name of the migration')
             ->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'The description of the migration')
-            ->addOption('table', 't', InputOption::VALUE_REQUIRED, 'The table name for the migration')
+            ->addOption('table', 't', InputOption::VALUE_OPTIONAL, 'The table name for the migration')
             ->addOption('path', 'p', InputOption::VALUE_OPTIONAL, 'The location where the migration file should be created');
     }
 
@@ -76,7 +76,7 @@ class AiMigrationCommand extends Command
         }
 
         $prompt .= "\nProvide only the final Laravel migration file code using the anonymous class format like this:
-        \n<?php\n\nreturn new class extends Migration {\n    // migration methods\n};\n
+        \n<?php\n\nreturn new class extends Migration {\n// migration methods\n};\n
         \nInclude everything like php tag and namespace, without any explanations or additional context.";
 
         return $prompt;
