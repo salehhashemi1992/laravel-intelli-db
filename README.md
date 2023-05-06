@@ -13,7 +13,7 @@ It extends the default `artisan make` commands in Laravel to automatically gener
 The following features are planned to be added to the package:
 
 - [x] `ai:rule` - Generate custom validation rules using AI
-- [ ] `ai:migration` - Generate migration files using AI
+- [x] `ai:migration` - Generate migration files using AI
 - [ ] `ai:factory` - Generate factory files using AI
 - [ ] `ai:model` - Generate model files using AI
 - [ ] `ai:resource` - Generate resource files using AI
@@ -45,6 +45,7 @@ Stay tuned for future updates as we continue to expand the capabilities of the L
 
 ## Usage
 
+### ai:rule
 To create a new validation rule using AI, run the following command:
 
 ```
@@ -61,12 +62,51 @@ If you don't provide a description, it will ask for it interactively.
 
 The generated rule class will be placed in the `app/Rules` directory.
 
-## Example
+### ai:migration
+To create a new migration file using AI, run the following command:
 
+```
+php artisan ai:migration your_migration_name
+```
+
+You can provide the description of the migration using the `--description` option:
+
+```
+php artisan ai:migration your_migration_name --description="Your migration description"
+```
+
+You can also specify the table name for the migration with the `--table` option:
+
+```
+php artisan ai:migration your_migration_name --table=your_table_name
+```
+
+This will append the schema of the desired table to provide a better result.
+
+And you can set the location where the migration file should be created using the `--path` option:
+
+```
+php artisan ai:migration your_migration_name --path=path/to/migrations
+```
+
+If you don't provide a description, it will ask for it interactively.
+
+The generated migration file will be placed in the `database/migrations` directory or the specified path.
+
+## Examples
+
+### ai:rule
 To create a rule that validates a unique email address, run:
 
 ```
 php artisan ai:rule UniqueEmail --description="Validate unique email address"
+```
+
+### ai:migration
+To create a migration that adds an email column to the users table, run:
+
+```
+php artisan ai:migration AddEmailToUsersTable --description="Add email column to users table" --table=users
 ```
 
 ### Testing
