@@ -25,8 +25,15 @@ class AiMigrationCommand extends Command
 
     public function handle(): int
     {
-        $name = Str::snake(trim($this->argument('name')));
+        $name = $this->argument('name');
+        if (! $name) {
+            $name = $this->ask($this->promptForMissingArgumentsUsing()['name']);
+        }
+
+        $name = Str::snake(trim($name));
+
         $description = $this->getMigrationDescription();
+
         $table = $this->option('table');
         $path = $this->option('path');
 
@@ -94,5 +101,12 @@ class AiMigrationCommand extends Command
         file_put_contents($filepath, $content);
 
         $this->info(sprintf('Migration [%s] created successfully.', $name));
+    }
+
+    protected function promptForMissingArgumentsUsing(): array
+    {
+        return [
+            'name' => 'What should the migration be named?',
+        ];
     }
 }
