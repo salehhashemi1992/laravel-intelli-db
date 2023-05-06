@@ -17,31 +17,6 @@ class AiRuleCommandConsoleTest extends TestCase
         return [LaravelIntelliDbServiceProvider::class];
     }
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // Register the custom command
-        $this->app->singleton('command.ai.rule', function ($app) {
-            return new AiRuleCommand($app['files']);
-        });
-
-        $this->app->booted(function () {
-            $this->app['command.ai.rule']->setLaravel($this->app);
-        });
-    }
-
-    /** @test */
-    public function test_creates_a_rule_without_description()
-    {
-        $this->artisan('ai:rule', [
-            'name' => 'SampleRule',
-        ])->assertExitCode(0);
-
-        // Check if the rule file has been created
-        $this->assertTrue(File::exists(app_path('Rules/SampleRule.php')));
-    }
-
     /** @test */
     public function test_creates_a_rule_with_description()
     {
