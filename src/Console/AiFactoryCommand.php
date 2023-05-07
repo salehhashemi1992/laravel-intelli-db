@@ -94,4 +94,14 @@ class AiFactoryCommand extends Command
 
         $this->info(sprintf('Factory [%s] created successfully.', $name));
     }
+
+    /**
+     * Prompt for missing arguments.
+     */
+    protected function promptForMissingArgumentsUsing(): array
+    {
+        return [
+            'name' => 'What should the factory be named?',
+        ];
+    }
 }
