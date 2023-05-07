@@ -35,13 +35,21 @@ class AiFactoryCommand extends Command
             $model = $this->ask('Please provide the model for the factory');
         }
 
-        if (! class_exists($model) || ! is_subclass_of($model, Model::class)) {
+        $modelClass = 'App\\Models\\'.$model;
+
+        if (! class_exists($modelClass) || ! is_subclass_of($modelClass, Model::class)) {
             $this->error("The provided model '{$model}' does not exist or is not a valid Eloquent model.");
 
             return 1;
         }
 
         $table = (new $model)->getTable();
+
+        if (! Schema::hasTable($table)) {
+            $this->error("The table for the provided model '{$model}' does not exist.");
+
+            return 1;
+        }
 
         $schema = Schema::getColumnListing($table);
 
