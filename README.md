@@ -16,7 +16,6 @@ The following features are planned to be added to the package:
 - [x] `ai:migration` - Generate migration files using AI
 - [ ] `ai:factory` - Generate factory files using AI
 - [ ] `ai:model` - Generate model files using AI
-- [ ] `ai:resource` - Generate resource files using AI
 - [ ] `ai:seeder` - Generate seeder files using AI
 
 Stay tuned for future updates as we continue to expand the capabilities of the Laravel Intelli DB package.
