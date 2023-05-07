@@ -3,15 +3,17 @@
 namespace Salehhashemi\LaravelIntelliDb\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Salehhashemi\LaravelIntelliDb\OpenAi;
 use Symfony\Component\Console\Input\InputOption;
 
 class AiFactoryCommand extends Command
 {
+    use ModelHelperTrait;
+
     protected $name = 'ai:factory';
 
     protected $description = 'Create a new factory using AI';
@@ -35,10 +37,10 @@ class AiFactoryCommand extends Command
             $model = $this->ask('Please provide the model for the factory');
         }
 
-        $modelClass = 'App\\Models\\'.$model;
-
-        if (! class_exists($modelClass) || ! is_subclass_of($modelClass, Model::class)) {
-            $this->error("The provided model '{$model}' does not exist or is not a valid Eloquent model.");
+        try {
+            $model = $this->qualifyModel($model);
+        } catch (InvalidArgumentException $e) {
+            $this->error($e->getMessage());
 
             return 1;
         }
@@ -57,7 +59,7 @@ class AiFactoryCommand extends Command
 
         try {
             $factoryContent = $this->fetchAiGeneratedContent($prompt);
-            $this->createFactoryFile($model, $factoryContent);
+            $this->createFactoryFile($name, $factoryContent);
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
         }
