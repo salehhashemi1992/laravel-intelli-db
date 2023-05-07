@@ -136,8 +136,7 @@ class AiFactoryCommand extends Command
     {
         $prompt = "Generate a Laravel factory named '{$name}' for the '{$model}' model.";
         $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
-        $prompt .= "\nConsider generating relations too based on the column names.";
-        $prompt .= "\nConsider generating Factory States if possible.";
+        $prompt .= "\nConsider generating relations too, based on the column names (like user_id) using appropriate methods such as afterCreating, etc.";
 
         $prompt .= "\nProvide only the final Laravel factory code without any explanations or additional context. (start with <?php)";
 
