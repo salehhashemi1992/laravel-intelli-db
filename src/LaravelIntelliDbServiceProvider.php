@@ -3,6 +3,7 @@
 namespace Salehhashemi\LaravelIntelliDb;
 
 use Illuminate\Support\ServiceProvider;
+use Salehhashemi\LaravelIntelliDb\Console\AiFactoryCommand;
 use Salehhashemi\LaravelIntelliDb\Console\AiMigrationCommand;
 use Salehhashemi\LaravelIntelliDb\Console\AiRuleCommand;
 
@@ -21,6 +22,7 @@ class LaravelIntelliDbServiceProvider extends ServiceProvider
             $this->commands([
                 AiRuleCommand::class,
                 AiMigrationCommand::class,
+                AiFactoryCommand::class,
             ]);
         }
     }
