@@ -11,10 +11,14 @@ use Symfony\Component\Console\Input\InputOption;
 
 class AiMigrationCommand extends Command
 {
-    // The name and signature of the console command.
+    /**
+     * The name and signature of the console command.
+     */
     protected $name = 'ai:migration';
 
-    // The console command description.
+    /**
+     * The console command description.
+     */
     protected $description = 'Create a new migration using AI';
 
     /**
@@ -33,34 +37,22 @@ class AiMigrationCommand extends Command
      */
     public function handle(): int
     {
-        $name = $this->argument('name');
-        if (! $name) {
-            $name = $this->ask($this->promptForMissingArgumentsUsing()['name']);
-        }
-
-        $name = Str::snake(trim($name));
-
-        $description = $this->getMigrationDescription();
-
+        $name = $this->getNameInput();
+        $description = $this->getDescriptionInput();
         $table = $this->option('table');
-
         $path = $this->option('path');
 
-        // Check if the table exists.
         if ($table && ! Schema::hasTable($table)) {
             $this->error("The table '{$table}' does not exist.");
 
             return 1;
         }
 
-        // Get the current schema of the table.
         $schema = $table ? Schema::getColumnListing($table) : null;
-
         $prompt = $this->createAiPrompt($description, $schema);
 
         try {
             $migrationContent = $this->fetchAiGeneratedContent($prompt);
-
             $this->createMigrationFile($name, $migrationContent, $path);
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
@@ -70,12 +62,24 @@ class AiMigrationCommand extends Command
     }
 
     /**
-     * Get the description of the migration.
+     * Get the name input from user.
      */
-    private function getMigrationDescription(): string
+    private function getNameInput(): string
+    {
+        $name = $this->argument('name');
+        if (! $name) {
+            $name = $this->ask($this->promptForMissingArgumentsUsing()['name']);
+        }
+
+        return Str::snake(trim($name));
+    }
+
+    /**
+     * Get the description input from user.
+     */
+    private function getDescriptionInput(): string
     {
         $description = $this->option('description');
-
         if (! $description) {
             $description = $this->ask('Please describe the migration you want to generate (e.g., "Add email column to users table")');
         }
@@ -84,7 +88,7 @@ class AiMigrationCommand extends Command
     }
 
     /**
-     * Create an AI prompt.
+     * Create an AI prompt for migration generation.
      */
     private function createAiPrompt(string $description, ?array $schema): string
     {
