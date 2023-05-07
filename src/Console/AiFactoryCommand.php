@@ -93,7 +93,7 @@ class AiFactoryCommand extends Command
             $name .= 'Factory';
         }
 
-        $name = "{$name}Factory.php";
+        $name = "{$name}.php";
         $filepath = "{$path}/{$name}";
 
         if (! file_exists($path)) {
