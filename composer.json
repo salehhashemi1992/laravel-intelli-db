@@ -10,8 +10,8 @@
         "factories",
         "migrations",
         "models",
-        "seeders",
-        "rules"
+        "rules",
+        "seeders"
     ],
     "homepage": "https://github.com/salehhashemi1992/laravel-intelli-db",
     "license": "MIT",
