@@ -113,6 +113,18 @@ If you don't provide the model, it will ask for it interactively.
 
 The generated factory file will be placed in the `database/factories` directory.
 
+### ai:model
+
+To create a new model file using AI, run the following command:
+
+```
+php artisan ai:model YourModelName
+```
+
+The generated model file will be placed in the `app/Models` directory.
+
+The generated model will include PHP DocBlock comments for properties, relationships, and methods with appropriate type hints.
+
 ## Examples
 
 ### ai:rule
@@ -137,6 +149,14 @@ To create a factory for the User model, run:
 
 ```
 php artisan ai:factory UserFactory --model="User"
+```
+
+### ai:model
+
+To create a model named Address, run:
+
+```
+php artisan ai:model Address
 ```
 
 ### Testing

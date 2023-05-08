@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-intelli-db` will be documented in this file
 
+## v0.4.0 - 2023-05-8
+
+- implement "ai:model" command to generate AI based models
+- enhance prompts
+
 ## v0.3.0 - 2023-05-8
 
 - implement "ai:factory" command to generate AI based factories
