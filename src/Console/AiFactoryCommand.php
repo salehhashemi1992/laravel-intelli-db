@@ -11,7 +11,7 @@ use Salehhashemi\LaravelIntelliDb\OpenAi;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class AiFactoryCommand
+ * Class AiFactoryCommand.
  *
  * A Laravel console command to create a new factory using AI.
  */
@@ -146,7 +146,7 @@ class AiFactoryCommand extends Command
     /**
      * Fetch AI-generated content using the provided prompt.
      *
-     * @param  string  $prompt The AI prompt
+     * @param  string  $prompt  The AI prompt
      * @return string The AI-generated content
      *
      * @throws RequestException
@@ -159,8 +159,8 @@ class AiFactoryCommand extends Command
     /**
      * Create a factory file using the provided name and content.
      *
-     * @param  string  $name The factory name
-     * @param  string  $content The factory content
+     * @param  string  $name  The factory name
+     * @param  string  $content  The factory content
      */
     private function createFactoryFile(string $name, string $content)
     {

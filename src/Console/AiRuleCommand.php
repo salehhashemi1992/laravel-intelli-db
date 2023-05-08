@@ -42,7 +42,7 @@ class AiRuleCommand extends RuleMakeCommand
     }
 
     /**
-     * Get the rule description from the option or ask the user if not provided
+     * Get the rule description from the option or ask the user if not provided.
      */
     private function getRuleDescription(): string
     {
@@ -56,7 +56,7 @@ class AiRuleCommand extends RuleMakeCommand
     }
 
     /**
-     * Create a prompt to generate the content of the rule file
+     * Create a prompt to generate the content of the rule file.
      */
     private function createAiPrompt(string $ruleDescription): string
     {
@@ -66,7 +66,7 @@ class AiRuleCommand extends RuleMakeCommand
     }
 
     /**
-     * Fetch the AI generated content
+     * Fetch the AI generated content.
      *
      * @throws RequestException
      */
