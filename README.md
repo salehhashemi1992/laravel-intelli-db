@@ -4,8 +4,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
 [![GitHub Actions](https://img.shields.io/github/actions/workflow/status/salehhashemi1992/laravel-intelli-db/run-tests.yml?branch=master&label=tests)](https://github.com/salehhashemi1992/laravel-intelli-db/actions/workflows/run-tests.yml)
 
-A Laravel package that provides an intelligent way to generate database-related components using 
-OpenAI.
+A Laravel package that provides an intelligent way to generate database-related components using OpenAI.
+
 It extends the default `artisan make` commands in Laravel to automatically generate the content of each component using AI, based on the provided description.
 
 ## ToDo
@@ -14,7 +14,7 @@ The following features are planned to be added to the package:
 
 - [x] `ai:rule` - Generate custom validation rules using AI
 - [x] `ai:migration` - Generate migration files using AI
-- [ ] `ai:factory` - Generate factory files using AI
+- [x] `ai:factory` - Generate factory files using AI
 - [ ] `ai:model` - Generate model files using AI
 - [ ] `ai:seeder` - Generate seeder files using AI
 
@@ -45,6 +45,7 @@ Stay tuned for future updates as we continue to expand the capabilities of the L
 ## Usage
 
 ### ai:rule
+
 To create a new validation rule using AI, run the following command:
 
 ```
@@ -62,6 +63,7 @@ If you don't provide a description, it will ask for it interactively.
 The generated rule class will be placed in the `app/Rules` directory.
 
 ### ai:migration
+
 To create a new migration file using AI, run the following command:
 
 ```
@@ -92,9 +94,28 @@ If you don't provide a description, it will ask for it interactively.
 
 The generated migration file will be placed in the `database/migrations` directory or the specified path.
 
+### ai:factory
+
+To create a new factory file using AI, run the following command:
+
+```
+php artisan ai:factory YourFactoryName
+```
+
+You can provide the name of the model for which the factory will be created using the `--model` option:
+
+```
+php artisan ai:factory YourFactoryName --model="YourModelName"
+```
+
+If you don't provide the model, it will ask for it interactively.
+
+The generated factory file will be placed in the `database/factories` directory.
+
 ## Examples
 
 ### ai:rule
+
 To create a rule that validates a unique email address, run:
 
 ```
@@ -102,10 +123,19 @@ php artisan ai:rule UniqueEmail --description="Validate unique email address"
 ```
 
 ### ai:migration
+
 To create a migration that adds an email column to the users table, run:
 
 ```
 php artisan ai:migration AddEmailToUsersTable --description="Add email column to users table" --table=users
+```
+
+### ai:factory
+
+To create a factory for the User model, run:
+
+```
+php artisan ai:factory UserFactory --model="User"
 ```
 
 ### Testing
@@ -124,8 +154,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
--   [Saleh Hashemi](https://github.com/salehhashemi1992)
--   [All Contributors](../../contributors)
+- [Saleh Hashemi](https://github.com/salehhashemi1992)
+- [All Contributors](../../contributors)
 
 ## License
 
