@@ -112,8 +112,8 @@ class AiModelCommand extends Command
         $prompt = "Generate a Laravel model named '{$name}'.";
         $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
         $prompt .= "\nConsider generating relationships and accessors/mutators based on the column names.";
-
         $prompt .= "\nProvide only the final Laravel model code without any explanations or additional context. (start with <?php)";
+        $prompt .= "\nThe final laravel code should include method type hints for all methods that accept arguments and return values.";
 
         return $prompt;
     }

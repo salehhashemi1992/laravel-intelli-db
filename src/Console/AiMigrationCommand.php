@@ -101,6 +101,7 @@ class AiMigrationCommand extends Command
         $prompt .= "\nProvide only the final Laravel migration file code using the anonymous class format like this:";
         $prompt .= "\n<?php\n\nreturn new class extends Migration {\n// migration methods\n};\n";
         $prompt .= "\nInclude everything like php tag and namespace, without any explanations or additional context.";
+        $prompt .= "\nThe final laravel code should include method type hints for all methods that accept arguments and return values.";
 
         return $prompt;
     }

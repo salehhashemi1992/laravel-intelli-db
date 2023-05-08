@@ -60,9 +60,12 @@ class AiRuleCommand extends RuleMakeCommand
      */
     private function createAiPrompt(string $ruleDescription): string
     {
-        return "Generate the PHP code for a Laravel validation rule class named '".$this->argument('name')."' that implements the Rule interface and does the following:".
-            "\n$ruleDescription".
-            "\nProvide only the final Laravel validation rule class code (include everything like <?php tag and namespace) without any explanations or additional context.";
+        $prompt = "Generate the PHP code for a Laravel validation rule class named '".$this->argument('name')."' that implements the Rule interface and does the following:";
+        $prompt .= "\n$ruleDescription";
+        $prompt .= "\nProvide only the final Laravel validation rule class code (include everything like <?php tag and namespace) without any explanations or additional context.";
+        $prompt .= "\nThe final laravel code should include method type hints for all methods that accept arguments and return values.";
+
+        return $prompt;
     }
 
     /**
