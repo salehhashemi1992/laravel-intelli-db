@@ -128,7 +128,7 @@ class AiModelCommand extends Command
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 4000);
+        return (new OpenAi())->execute($prompt, 3500);
     }
 
     /**
