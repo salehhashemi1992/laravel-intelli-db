@@ -109,11 +109,14 @@ class AiModelCommand extends Command
      */
     private function createAiPrompt(string $name, array $schema): string
     {
-        $prompt = "Generate a Laravel model named '{$name}'.";
+        $prompt = "Generate a Laravel model named '{$name}' with PHP DocBlock comments for properties, relationships, and methods.";
         $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
-        $prompt .= "\nConsider generating relationships and accessors/mutators based on the column names.";
+        $prompt .= "\nConsider generating relationships, mutators, and accessors based on the model's columns and their names.";
+
+        $prompt .= "\nInclude type hints for methods and their arguments.";
+        $prompt .= "\nThe PHP DocBlock comments should include information about properties, their types, relationships, and methods.";
+
         $prompt .= "\nProvide only the final Laravel model code without any explanations or additional context. (start with <?php)";
-        $prompt .= "\nThe final laravel code should include method type hints for all methods that accept arguments and return values.";
 
         return $prompt;
     }

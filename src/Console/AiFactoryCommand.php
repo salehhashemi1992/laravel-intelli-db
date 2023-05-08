@@ -138,7 +138,7 @@ class AiFactoryCommand extends Command
         $prompt .= "\nThe current schema of the table is as follows:\n".implode(', ', $schema);
         $prompt .= "\nConsider generating relations too, based on the column names (like user_id) using appropriate methods such as afterCreating, etc.";
         $prompt .= "\nProvide only the final Laravel factory code without any explanations or additional context. (start with <?php)";
-        $prompt .= "\nThe final laravel code should include method type hints for all methods that accept arguments and return values.";
+        $prompt .= "\nInclude type hints for methods and their arguments.";
 
         return $prompt;
     }
