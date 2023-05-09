@@ -9,14 +9,14 @@ A Laravel package that provides an intelligent way to generate database-related 
 
 It extends the default `artisan make` commands in Laravel to automatically generate the content of each component using AI, based on the provided description.
 
-## ToDo
+## Features
 
-The following features are planned to be added to the package:
+The following commands are implemented in this package:
 
-- [x] `ai:rule` - Generate custom validation rules using AI
-- [x] `ai:migration` - Generate migration files using AI
-- [x] `ai:factory` - Generate factory files using AI
-- [x] `ai:model` - Generate model files using AI
+- `ai:rule` - Generate custom validation rules using AI
+- `ai:migration` - Generate migration files using AI
+- `ai:factory` - Generate factory files using AI
+- `ai:model` - Generate model files using AI
 
 Stay tuned for future updates as we continue to expand the capabilities of the Laravel Intelli DB package.
 
