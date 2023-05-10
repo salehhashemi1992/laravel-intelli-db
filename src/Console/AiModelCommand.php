@@ -28,6 +28,11 @@ class AiModelCommand extends Command
      */
     protected $description = 'Create a new model using AI';
 
+    public function __construct(private readonly OpenAi $openAi)
+    {
+        parent::__construct();
+    }
+
     /**
      * Configure the command options.
      */
@@ -131,7 +136,7 @@ class AiModelCommand extends Command
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 3500);
+        return $this->openAi->execute($prompt, 3500);
     }
 
     /**

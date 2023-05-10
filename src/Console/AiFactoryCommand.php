@@ -29,6 +29,11 @@ class AiFactoryCommand extends Command
      */
     protected $description = 'Create a new factory using AI';
 
+    public function __construct(private readonly OpenAi $openAi)
+    {
+        parent::__construct();
+    }
+
     /**
      * Configure the command options.
      */
@@ -153,7 +158,7 @@ class AiFactoryCommand extends Command
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 2000);
+        return $this->openAi->execute($prompt, 2000);
     }
 
     /**

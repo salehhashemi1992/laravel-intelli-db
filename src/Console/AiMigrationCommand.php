@@ -21,6 +21,11 @@ class AiMigrationCommand extends Command
      */
     protected $description = 'Create a new migration using AI';
 
+    public function __construct(private readonly OpenAi $openAi)
+    {
+        parent::__construct();
+    }
+
     /**
      * Configure the command options.
      */
@@ -113,7 +118,7 @@ class AiMigrationCommand extends Command
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 2000);
+        return $this->openAi->execute($prompt, 2000);
     }
 
     /**

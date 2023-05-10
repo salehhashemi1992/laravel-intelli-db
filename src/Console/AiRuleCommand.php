@@ -2,6 +2,7 @@
 
 namespace Salehhashemi\LaravelIntelliDb\Console;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\RuleMakeCommand;
 use Illuminate\Http\Client\RequestException;
 use Salehhashemi\LaravelIntelliDb\OpenAi;
@@ -12,6 +13,13 @@ class AiRuleCommand extends RuleMakeCommand
     protected $name = 'ai:rule';
 
     protected $description = 'Create a new rule using AI';
+
+    public function __construct(
+        Filesystem $files,
+        private readonly OpenAi $openAi
+    ) {
+        parent::__construct($files);
+    }
 
     protected function configure()
     {
@@ -72,6 +80,6 @@ class AiRuleCommand extends RuleMakeCommand
      */
     private function fetchAiGeneratedContent(string $prompt): string
     {
-        return (new OpenAi())->execute($prompt, 1000);
+        return $this->openAi->execute($prompt, 1000);
     }
 }
