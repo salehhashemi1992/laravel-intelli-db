@@ -2,7 +2,6 @@
 
 namespace Salehhashemi\LaravelIntelliDb\Console;
 
-use Exception;
 use Illuminate\Foundation\Console\RuleMakeCommand;
 use Illuminate\Http\Client\RequestException;
 use Salehhashemi\LaravelIntelliDb\OpenAi;
@@ -34,8 +33,6 @@ class AiRuleCommand extends RuleMakeCommand
             return $this->fetchAiGeneratedContent($prompt);
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
-        } catch (Exception $e) {
-            $this->error($e->getMessage());
         }
 
         return parent::buildClass($name);
