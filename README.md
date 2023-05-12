@@ -1,4 +1,4 @@
-# Laravel Intelli DB
+# Laravel IntelliDB
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
 [![Total Downloads](https://img.shields.io/packagist/dt/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
@@ -8,6 +8,8 @@
 A Laravel package that provides an intelligent way to generate database-related components using OpenAI.
 
 It extends the default `artisan make` commands in Laravel to automatically generate the content of each component using AI, based on the provided description.
+
+![Header Image](./assets/header.png)
 
 ## Features
 
