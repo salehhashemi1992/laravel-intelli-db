@@ -142,7 +142,7 @@ class AiFactoryCommand extends Command
      * If no class is found with either the original name or the constructed name, it throws
      * an InvalidArgumentException.
      *
-     * @param  string  $model The model class name to qualify.
+     * @param  string  $model  The model class name to qualify.
      * @return string The qualified model class name.
      *
      * @throws InvalidArgumentException If no model class is found with the given name.
