@@ -3,11 +3,10 @@
 namespace Salehhashemi\LaravelIntelliDb\Tests;
 
 use Illuminate\Foundation\Console\Kernel;
-use Orchestra\Testbench\TestCase;
 use Salehhashemi\LaravelIntelliDb\Console\AiFactoryCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
-class AiModelCommandConsoleTest extends TestCase
+class AiModelCommandConsoleTest extends BaseTest
 {
     /**
      * {@inheritdoc}
@@ -35,5 +34,18 @@ class AiModelCommandConsoleTest extends TestCase
         $arguments = $definition->getArguments();
 
         $this->assertArrayHasKey('name', $arguments);
+    }
+
+    /** @test */
+    public function test_ai_model_command()
+    {
+        $this->artisan('ai:model', ['name' => 'User'])
+            ->assertExitCode(0);
+
+        $this->assertTrue(file_exists(app_path('Models/User.php')));
+        $this->assertEquals('Output', file_get_contents(app_path('Models/User.php')));
+
+        // Cleanup
+        unlink(app_path('Models/User.php'));
     }
 }

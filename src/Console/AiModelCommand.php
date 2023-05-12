@@ -16,8 +16,6 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class AiModelCommand extends Command
 {
-    use ModelHelperTrait;
-
     /**
      * The name and signature of the console command.
      */

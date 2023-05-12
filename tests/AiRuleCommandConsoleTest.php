@@ -3,11 +3,10 @@
 namespace Salehhashemi\LaravelIntelliDb\Tests;
 
 use Illuminate\Foundation\Console\Kernel;
-use Orchestra\Testbench\TestCase;
 use Salehhashemi\LaravelIntelliDb\Console\AiRuleCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
-class AiRuleCommandConsoleTest extends TestCase
+class AiRuleCommandConsoleTest extends BaseTest
 {
     /**
      * {@inheritdoc}
@@ -37,5 +36,18 @@ class AiRuleCommandConsoleTest extends TestCase
 
         $this->assertArrayHasKey('name', $arguments);
         $this->assertArrayHasKey('description', $options);
+    }
+
+    /** @test */
+    public function test_ai_rule_command()
+    {
+        $this->artisan('ai:model', ['name' => 'User'])
+            ->assertExitCode(0);
+
+        $this->assertTrue(file_exists(app_path('Models/User.php')));
+        $this->assertEquals('Output', file_get_contents(app_path('Models/User.php')));
+
+        // Cleanup
+        unlink(app_path('Models/User.php'));
     }
 }

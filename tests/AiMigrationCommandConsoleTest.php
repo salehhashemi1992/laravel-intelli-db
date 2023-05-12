@@ -3,11 +3,11 @@
 namespace Salehhashemi\LaravelIntelliDb\Tests;
 
 use Illuminate\Foundation\Console\Kernel;
-use Orchestra\Testbench\TestCase;
+use Illuminate\Support\Facades\File;
 use Salehhashemi\LaravelIntelliDb\Console\AiMigrationCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
 
-class AiMigrationCommandConsoleTest extends TestCase
+class AiMigrationCommandConsoleTest extends BaseTest
 {
     /**
      * {@inheritdoc}
@@ -40,5 +40,24 @@ class AiMigrationCommandConsoleTest extends TestCase
         $this->assertArrayHasKey('description', $options);
         $this->assertArrayHasKey('table', $options);
         $this->assertArrayHasKey('path', $options);
+    }
+
+    /** @test */
+    public function test_ai_migration_command()
+    {
+        $this->artisan('ai:migration', [
+            'name' => 'create_users_table',
+            '--table' => 'users',
+            '--description' => 'Create users table',
+        ])->assertExitCode(0);
+
+        $this->assertTrue(File::exists(database_path('migrations')));
+
+        $migrationFile = File::glob(database_path('migrations').'/*_create_users_table.php');
+        $this->assertNotEmpty($migrationFile);
+        $this->assertStringEqualsFile(reset($migrationFile), 'Output');
+
+        // Cleanup
+        File::delete($migrationFile);
     }
 }

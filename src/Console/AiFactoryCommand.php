@@ -17,8 +17,6 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class AiFactoryCommand extends Command
 {
-    use ModelHelperTrait;
-
     /**
      * The name and signature of the console command.
      */
@@ -132,6 +130,38 @@ class AiFactoryCommand extends Command
         $table = (new $model)->getTable();
 
         return Schema::getColumnListing($table);
+    }
+
+    /**
+     * Qualify the model class name.
+     *
+     * If a class with the constructed name exists, it returns the fully qualified class name.
+     * If not, it checks if a class with the original name exists. If it does, it returns the
+     * original name.
+     *
+     * If no class is found with either the original name or the constructed name, it throws
+     * an InvalidArgumentException.
+     *
+     * @param  string  $model The model class name to qualify.
+     * @return string The qualified model class name.
+     *
+     * @throws InvalidArgumentException If no model class is found with the given name.
+     */
+    public function qualifyModel(string $model): string
+    {
+        $model = ltrim($model, '\\');
+
+        $namespaceModel = $this->laravel->getNamespace().'Models\\'.$model;
+
+        if (class_exists($namespaceModel)) {
+            return $namespaceModel;
+        }
+
+        if (class_exists($model)) {
+            return $model;
+        }
+
+        throw new InvalidArgumentException("Model '{$model}' does not exist.");
     }
 
     /**
