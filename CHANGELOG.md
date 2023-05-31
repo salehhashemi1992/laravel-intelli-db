@@ -2,9 +2,13 @@
 
 All notable changes to `laravel-intelli-db` will be documented in this file
 
+## v0.5.2 - 2023-05-12
+
+- add user notification for AI generation process
+
 ## v0.5.1 - 2023-05-12
 
-- Extend HTTP Request Timeout in OpenAI API Call
+- extend HTTP request timeout in OpenAI api call
 
 ## v0.5.0 - 2023-05-12
 
