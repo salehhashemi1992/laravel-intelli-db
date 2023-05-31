@@ -38,7 +38,9 @@ class OpenAi
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$apiKey,
             'Content-Type' => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', $input_data);
+        ])
+            ->timeout(90)
+            ->post('https://api.openai.com/v1/chat/completions', $input_data);
 
         if ($response->successful()) {
             $complete = $response->json();
