@@ -34,7 +34,7 @@ class AiModelCommand extends Command
     /**
      * Configure the command options.
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->addArgument('name', InputOption::VALUE_REQUIRED, 'The name of the model');
     }
@@ -52,6 +52,8 @@ class AiModelCommand extends Command
 
         $schema = $this->getSchemaForModel($name);
         $prompt = $this->createAiPrompt($name, $schema);
+
+        $this->info('Generating AI model, this might take a few moments...');
 
         try {
             $modelContent = $this->fetchAiGeneratedContent($prompt);

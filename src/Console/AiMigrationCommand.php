@@ -56,6 +56,8 @@ class AiMigrationCommand extends Command
         $schema = $table ? Schema::getColumnListing($table) : null;
         $prompt = $this->createAiPrompt($description, $schema);
 
+        $this->info('Generating AI migration, this might take a few moments...');
+
         try {
             $migrationContent = $this->fetchAiGeneratedContent($prompt);
             $this->createMigrationFile($name, $migrationContent, $path);

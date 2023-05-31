@@ -21,7 +21,7 @@ class AiRuleCommand extends RuleMakeCommand
         parent::__construct($files);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -36,6 +36,8 @@ class AiRuleCommand extends RuleMakeCommand
         $ruleDescription = $this->getRuleDescription();
 
         $prompt = $this->createAiPrompt($ruleDescription);
+
+        $this->info('Generating AI rule, this might take a few moments...');
 
         try {
             return $this->fetchAiGeneratedContent($prompt);

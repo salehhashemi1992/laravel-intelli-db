@@ -35,7 +35,7 @@ class AiFactoryCommand extends Command
     /**
      * Configure the command options.
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->addArgument('name', InputOption::VALUE_REQUIRED, 'The name of the factory')
             ->addOption('model', 'm', InputOption::VALUE_REQUIRED, 'The model for the factory');
@@ -63,6 +63,8 @@ class AiFactoryCommand extends Command
 
         $schema = $this->getSchemaForModel($model);
         $prompt = $this->createAiPrompt($name, $model, $schema);
+
+        $this->info('Generating AI factory, this might take a few moments...');
 
         try {
             $factoryContent = $this->fetchAiGeneratedContent($prompt);
