@@ -56,10 +56,7 @@
         "laravel": {
             "providers": [
                 "Salehhashemi\\LaravelIntelliDb\\LaravelIntelliDbServiceProvider"
-            ],
-            "aliases": {
-                "LaravelIntelliDb": "Salehhashemi\\LaravelIntelliDb\\LaravelIntelliDbFacade"
-            }
+            ]
         }
     }
 }
