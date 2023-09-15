@@ -16,7 +16,6 @@ class AiRuleCommandConsoleTest extends BaseTest
         return [LaravelIntelliDbServiceProvider::class];
     }
 
-    /** @test */
     public function test_ai_rule_command_is_registered()
     {
         $kernel = $this->app->make(Kernel::class);
@@ -26,7 +25,6 @@ class AiRuleCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('ai:rule', $commandList);
     }
 
-    /** @test */
     public function test_ai_rule_command_options()
     {
         $command = $this->app->make(AiRuleCommand::class);
@@ -38,7 +36,6 @@ class AiRuleCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('description', $options);
     }
 
-    /** @test */
     public function test_ai_rule_command()
     {
         $this->artisan('ai:model', ['name' => 'User'])

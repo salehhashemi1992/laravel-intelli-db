@@ -16,7 +16,6 @@ class AiModelCommandConsoleTest extends BaseTest
         return [LaravelIntelliDbServiceProvider::class];
     }
 
-    /** @test */
     public function test_ai_model_command_is_registered()
     {
         $kernel = $this->app->make(Kernel::class);
@@ -26,7 +25,6 @@ class AiModelCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('ai:model', $commandList);
     }
 
-    /** @test */
     public function test_ai_model_command_options()
     {
         $command = $this->app->make(AiFactoryCommand::class);
@@ -36,7 +34,6 @@ class AiModelCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('name', $arguments);
     }
 
-    /** @test */
     public function test_ai_model_command()
     {
         $this->artisan('ai:model', ['name' => 'User'])

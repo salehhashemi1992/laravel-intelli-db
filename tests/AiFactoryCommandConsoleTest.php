@@ -16,7 +16,6 @@ class AiFactoryCommandConsoleTest extends BaseTest
         return [LaravelIntelliDbServiceProvider::class];
     }
 
-    /** @test */
     public function test_ai_factory_command_is_registered()
     {
         $kernel = $this->app->make(Kernel::class);
@@ -26,7 +25,6 @@ class AiFactoryCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('ai:factory', $commandList);
     }
 
-    /** @test */
     public function test_ai_factory_command_options()
     {
         $command = $this->app->make(AiFactoryCommand::class);
@@ -38,7 +36,6 @@ class AiFactoryCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('model', $options);
     }
 
-    /** @test */
     public function test_ai_factory_command()
     {
         // Create a model for the purpose of the test

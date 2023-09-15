@@ -17,7 +17,6 @@ class AiMigrationCommandConsoleTest extends BaseTest
         return [LaravelIntelliDbServiceProvider::class];
     }
 
-    /** @test */
     public function test_ai_migration_command_is_registered()
     {
         $kernel = $this->app->make(Kernel::class);
@@ -27,7 +26,6 @@ class AiMigrationCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('ai:migration', $commandList);
     }
 
-    /** @test */
     public function test_ai_migration_command_options()
     {
         $command = $this->app->make(AiMigrationCommand::class);
@@ -42,7 +40,6 @@ class AiMigrationCommandConsoleTest extends BaseTest
         $this->assertArrayHasKey('path', $options);
     }
 
-    /** @test */
     public function test_ai_migration_command()
     {
         $this->artisan('ai:migration', [
