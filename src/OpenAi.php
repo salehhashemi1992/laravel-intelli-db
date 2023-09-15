@@ -23,9 +23,9 @@ class OpenAi
         }
 
         $input_data = [
-            'temperature' => 0.7,
+            'temperature' => config('intelli-db.temperature'),
             'max_tokens' => $maxTokens,
-            'frequency_penalty' => 0,
+            'frequency_penalty' => config('intelli-db.frequency_penalty'),
             'model' => config('intelli-db.model'),
             'messages' => [
                 [
