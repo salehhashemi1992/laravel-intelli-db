@@ -42,12 +42,12 @@ class OpenAi
             ->timeout(90)
             ->post('https://api.openai.com/v1/chat/completions', $input_data);
 
-        if ($response->successful()) {
-            $complete = $response->json();
-
-            return $complete['choices'][0]['message']['content'];
-        } else {
+        if ($response->failed()) {
             throw new RequestException($response);
         }
+
+        $complete = $response->json();
+
+        return $complete['choices'][0]['message']['content'];
     }
 }
