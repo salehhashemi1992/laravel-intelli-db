@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-intelli-db` will be documented in this file
 
+## v0.6.0 - 2023-09-16
+
+- add temperature and frequency_penalty to config file
+- bug fixes
+
 ## v0.5.2 - 2023-05-12
 
 - add user notification for AI generation process
