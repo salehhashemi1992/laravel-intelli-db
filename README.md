@@ -44,6 +44,13 @@ Stay tuned for future updates as we continue to expand the capabilities of the L
    OPEN_AI_MODEL=gpt-4
     ```
 
+To adjust the behavior of the AI text generation, you can set the following parameters in your configuration file:
+```
+'temperature' => 0.7
+'frequency_penalty' => 0.2
+```
+
+
 ## Usage
 
 ### ai:rule
