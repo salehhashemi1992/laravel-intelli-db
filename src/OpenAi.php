@@ -23,9 +23,9 @@ class OpenAi
         }
 
         $input_data = [
-            'temperature' => 0.7,
+            'temperature' => config('intelli-db.temperature'),
             'max_tokens' => $maxTokens,
-            'frequency_penalty' => 0,
+            'frequency_penalty' => config('intelli-db.frequency_penalty'),
             'model' => config('intelli-db.model'),
             'messages' => [
                 [
@@ -42,12 +42,12 @@ class OpenAi
             ->timeout(90)
             ->post('https://api.openai.com/v1/chat/completions', $input_data);
 
-        if ($response->successful()) {
-            $complete = $response->json();
-
-            return $complete['choices'][0]['message']['content'];
-        } else {
+        if ($response->failed()) {
             throw new RequestException($response);
         }
+
+        $complete = $response->json();
+
+        return $complete['choices'][0]['message']['content'];
     }
 }
