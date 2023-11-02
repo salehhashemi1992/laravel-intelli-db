@@ -100,7 +100,7 @@ class AiModelCommand extends Command
     /**
      * Get the schema for the provided model.
      *
-     * @return array The schema for the model
+     * @return string[] The schema for the model (list of column names).
      */
     private function getSchemaForModel(string $name): array
     {
@@ -111,6 +111,8 @@ class AiModelCommand extends Command
 
     /**
      * Create an AI prompt using the provided information.
+     *
+     * @param  string[]  $schema The schema information, if available.
      */
     private function createAiPrompt(string $name, array $schema): string
     {
@@ -145,7 +147,7 @@ class AiModelCommand extends Command
      * @param  string  $name  The model name
      * @param  string  $content  The model content
      */
-    private function createModelFile(string $name, string $content)
+    private function createModelFile(string $name, string $content): void
     {
         $path = app_path('Models');
         $name = "{$name}.php";
@@ -162,6 +164,8 @@ class AiModelCommand extends Command
 
     /**
      * Prompt for missing arguments.
+     *
+     * @return array<string, string>
      */
     protected function promptForMissingArgumentsUsing(): array
     {

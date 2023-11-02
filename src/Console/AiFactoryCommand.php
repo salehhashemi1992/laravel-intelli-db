@@ -111,7 +111,9 @@ class AiFactoryCommand extends Command
      */
     private function tableExistsForModel(string $model): bool
     {
-        $table = (new $model)->getTable();
+        /** @var \Illuminate\Database\Eloquent\Model $object */
+        $object = new $model;
+        $table = $object->getTable();
 
         if (! Schema::hasTable($table)) {
             $this->error("The table for the provided model '{$model}' does not exist.");
@@ -125,11 +127,13 @@ class AiFactoryCommand extends Command
     /**
      * Get the schema for the provided model.
      *
-     * @return array The schema for the model
+     * @return string[] The schema for the model
      */
     private function getSchemaForModel(string $model): array
     {
-        $table = (new $model)->getTable();
+        /** @var \Illuminate\Database\Eloquent\Model $object */
+        $object = new $model;
+        $table = $object->getTable();
 
         return Schema::getColumnListing($table);
     }
@@ -168,6 +172,8 @@ class AiFactoryCommand extends Command
 
     /**
      * Create an AI prompt using the provided information.
+     *
+     * @param  string[]  $schema The schema of the model as an array of column names
      */
     private function createAiPrompt(string $name, string $model, array $schema): string
     {
@@ -199,7 +205,7 @@ class AiFactoryCommand extends Command
      * @param  string  $name  The factory name
      * @param  string  $content  The factory content
      */
-    private function createFactoryFile(string $name, string $content)
+    private function createFactoryFile(string $name, string $content): void
     {
         $path = database_path('factories');
         if (! Str::endsWith($name, 'Factory')) {
@@ -220,6 +226,8 @@ class AiFactoryCommand extends Command
 
     /**
      * Prompt for missing arguments.
+     *
+     * @return array<string, string>
      */
     protected function promptForMissingArgumentsUsing(): array
     {
