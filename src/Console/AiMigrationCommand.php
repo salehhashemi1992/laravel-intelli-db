@@ -2,6 +2,7 @@
 
 namespace Salehhashemi\LaravelIntelliDb\Console;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Schema;
@@ -47,22 +48,39 @@ class AiMigrationCommand extends Command
         $table = $this->option('table');
         $path = $this->option('path');
 
-        if ($table && ! Schema::hasTable($table)) {
+        if ($table && is_string($table) && ! Schema::hasTable($table)) {
             $this->error("The table '{$table}' does not exist.");
 
             return 1;
         }
 
-        $schema = $table ? Schema::getColumnListing($table) : null;
+        $schema = null;
+        if ($table && is_string($table)) {
+            $schema = Schema::getColumnListing($table);
+        }
+
         $prompt = $this->createAiPrompt($description, $schema);
 
         $this->info('Generating AI migration, this might take a few moments...');
 
         try {
             $migrationContent = $this->fetchAiGeneratedContent($prompt);
+
+            if (! is_string($path) && $path !== null) {
+                $this->error('Invalid path provided.');
+
+                return 1;
+            }
+
             $this->createMigrationFile($name, $migrationContent, $path);
         } catch (RequestException $e) {
             $this->error('Error fetching AI-generated content: '.$e->getMessage());
+
+            return 1;
+        } catch (Exception $e) {
+            $this->error('Error occurred: '.$e->getMessage());
+
+            return 1;
         }
 
         return 0;
@@ -96,6 +114,8 @@ class AiMigrationCommand extends Command
 
     /**
      * Create an AI prompt for migration generation.
+     *
+     * @param  string[]|null  $schema The schema information, if available.
      */
     private function createAiPrompt(string $description, ?array $schema): string
     {
@@ -143,6 +163,8 @@ class AiMigrationCommand extends Command
 
     /**
      * Prompt for missing arguments.
+     *
+     * @return array<string, string>
      */
     protected function promptForMissingArgumentsUsing(): array
     {

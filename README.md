@@ -2,8 +2,9 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
 [![Total Downloads](https://img.shields.io/packagist/dt/salehhashemi/laravel-intelli-db.svg?style=flat-square)](https://packagist.org/packages/salehhashemi/laravel-intelli-db)
-[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/salehhashemi1992/laravel-intelli-db/run-tests.yml?branch=main&label=tests)](https://github.com/salehhashemi1992/laravel-intelli-db/actions/workflows/run-tests.yml)
-[![StyleCI](https://github.styleci.io/repos/636362938/shield?branch=main)](https://github.styleci.io/repos/636362938?branch=main)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/salehhashemi1992/laravel-intelli-db/tests.yml?branch=main&label=tests)](https://github.com/salehhashemi1992/laravel-intelli-db/actions/workflows/tests.yml)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/salehhashemi1992/laravel-intelli-db/static-analysis.yml?branch=main&label=static-analysis)](https://github.com/salehhashemi1992/laravel-intelli-db/actions/workflows/static-analysis.yml)
+[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://phpstan.org/)
 
 A Laravel package that provides an intelligent way to generate database-related components using OpenAI.
 

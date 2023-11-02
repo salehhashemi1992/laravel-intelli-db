@@ -6,4 +6,4 @@ parameters:
         - src
         - config
 
-    level: 4
+    level: 8

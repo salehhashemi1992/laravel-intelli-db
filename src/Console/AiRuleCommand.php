@@ -5,6 +5,7 @@ namespace Salehhashemi\LaravelIntelliDb\Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\RuleMakeCommand;
 use Illuminate\Http\Client\RequestException;
+use InvalidArgumentException;
 use Salehhashemi\LaravelIntelliDb\OpenAi;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -67,7 +68,13 @@ class AiRuleCommand extends RuleMakeCommand
      */
     private function createAiPrompt(string $ruleDescription): string
     {
-        $prompt = "Generate the PHP code for a Laravel validation rule class named '".$this->argument('name')."' that implements the Rule interface and does the following:";
+        $ruleName = $this->argument('name');
+
+        if (! is_string($ruleName)) {
+            throw new InvalidArgumentException("The 'name' argument must be a string.");
+        }
+
+        $prompt = "Generate the PHP code for a Laravel validation rule class named '".$ruleName."' that implements the Rule interface and does the following:";
         $prompt .= "\n$ruleDescription";
         $prompt .= "\nProvide only the final Laravel validation rule class code (include everything like <?php tag and namespace) without any explanations or additional context.";
         $prompt .= "\nInclude type hints for methods and their arguments.";
