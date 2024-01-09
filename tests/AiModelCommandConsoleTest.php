@@ -39,8 +39,8 @@ class AiModelCommandConsoleTest extends BaseTest
         $this->artisan('ai:model', ['name' => 'User'])
             ->assertExitCode(0);
 
-        $this->assertTrue(file_exists(app_path('Models/User.php')));
-        $this->assertEquals('Output', file_get_contents(app_path('Models/User.php')));
+        $this->assertFileExists(app_path('Models/User.php'));
+        $this->assertSame('Output', file_get_contents(app_path('Models/User.php')));
 
         // Cleanup
         unlink(app_path('Models/User.php'));

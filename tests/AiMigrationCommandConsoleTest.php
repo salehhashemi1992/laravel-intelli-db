@@ -48,7 +48,7 @@ class AiMigrationCommandConsoleTest extends BaseTest
             '--description' => 'Create users table',
         ])->assertExitCode(0);
 
-        $this->assertTrue(File::exists(database_path('migrations')));
+        $this->assertFileExists(database_path('migrations'));
 
         $migrationFile = File::glob(database_path('migrations').'/*_create_users_table.php');
         $this->assertNotEmpty($migrationFile);
