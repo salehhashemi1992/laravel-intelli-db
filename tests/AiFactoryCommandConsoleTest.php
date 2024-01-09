@@ -5,6 +5,7 @@ namespace Salehhashemi\LaravelIntelliDb\Tests;
 use Illuminate\Foundation\Console\Kernel;
 use Salehhashemi\LaravelIntelliDb\Console\AiFactoryCommand;
 use Salehhashemi\LaravelIntelliDb\LaravelIntelliDbServiceProvider;
+use Salehhashemi\LaravelIntelliDb\Tests\TestSupport\Models\User;
 
 class AiFactoryCommandConsoleTest extends BaseTest
 {
@@ -38,23 +39,17 @@ class AiFactoryCommandConsoleTest extends BaseTest
 
     public function test_ai_factory_command()
     {
-        // Create a model for the purpose of the test
-        $modelPath = app_path('Models/User.php');
-        file_put_contents($modelPath, "<?php namespace App\Models; use Illuminate\Database\Eloquent\Model; class User extends Model { }");
-
-        require_once $modelPath;
-
-        $this->artisan('ai:factory', [
-            'name' => 'UserFactory',
-            '--model' => 'User',
-        ])
+        $this
+            ->artisan('ai:factory', [
+                'name' => 'UserFactory',
+                '--model' => User::class,
+            ])
             ->assertExitCode(0);
 
-        $this->assertTrue(file_exists(database_path('factories/UserFactory.php')));
-        $this->assertEquals('Output', file_get_contents(database_path('factories/UserFactory.php')));
+        $this->assertFileExists(database_path('factories/UserFactory.php'));
+        $this->assertSame('Output', file_get_contents(database_path('factories/UserFactory.php')));
 
         // Cleanup
         unlink(database_path('factories/UserFactory.php'));
-        unlink($modelPath);  // Delete the test model
     }
 }
